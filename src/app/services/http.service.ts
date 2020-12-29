@@ -10,6 +10,18 @@ export class HttpService {
   constructor(private http: HttpClient) {
   }
 
+  doGet(url: string, param, successCallback, errorResponse: ErrorResponseModel): void {
+    this.http.get<any>(url, {params: param})
+      .subscribe(
+        response => {
+          successCallback(response);
+        },
+        error => {
+          errorResponse.code = error.status;
+        }
+      );
+  }
+
   doPost(url: string, body, successCallback, errorResponse: ErrorResponseModel): void {
     this.http.post<any>(url, body)
       .subscribe(response => {

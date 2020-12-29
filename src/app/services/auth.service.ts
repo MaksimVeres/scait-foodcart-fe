@@ -13,9 +13,13 @@ export class AuthService {
 
   private static AUTH_ENDPOINT = environment.api_url + '/auth';
   private static JWT_ITEM = 'jwt';
+  private static REFRESH_TIME = 90000;
 
   constructor(private http: HttpService,
               private router: Router) {
+    this.startAsyncRefresher().catch(error => {
+      console.log(error);
+    });
   }
 
   signIn(user: UserSignInModel, errorResponse: ErrorResponseModel): void {
@@ -34,6 +38,27 @@ export class AuthService {
     localStorage.setItem(AuthService.JWT_ITEM, token);
   }
 
+  async startAsyncRefresher(): Promise<void> {
+    const refreshTokenUrl = AuthService.AUTH_ENDPOINT + '/refresh';
+    const error = new ErrorResponseModel();
+    while (true) {
+
+      if (this.isLoggedIn) {
+        this.http.doPost(refreshTokenUrl, null,
+          (response) => {
+            this.setToken(response.token);
+          },
+          error);
+      }
+      // 10 min
+      await this.delay(600000);
+    }
+  }
+
+  delay(ms: number): Promise<any> {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   getToken(): string {
     return localStorage.getItem(AuthService.JWT_ITEM);
   }
@@ -44,13 +69,13 @@ export class AuthService {
 
   logOut(): void {
     localStorage.removeItem(AuthService.JWT_ITEM);
-    this.router.navigate(['']);
+    this.router.navigate(['articles']);
   }
 
   authSuccessCallback(): any {
     return (response) => {
       this.setToken(response.token);
-      this.router.navigate(['']);
+      this.router.navigate(['articles']);
     };
   }
 

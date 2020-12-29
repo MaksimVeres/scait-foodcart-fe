@@ -1,62 +1,59 @@
-<h4 class="modal-header text-center">Results of search request: "Snickers"</h4>
+<h4 class="modal-header text-center">Articles</h4>
+<h4 *ngIf="response.result">
+  Found: {{response.totalElements}}
+  <br/>
+  <ng-template *ngIf="response.totalPages > 0">
+    Page: {{response.pageNumber + 1}} / {{response.totalPages}}
+  </ng-template>
+</h4>
+<h4 *ngIf="error.code" class="text-danger">
+  {{processError()}}
+  {{error.message}}
+</h4>
+<div class="text-center">
+  <label class="w-25">
+    <input type="text" class="form-control" placeholder="Search" [(ngModel)]="model.text">
+  </label>
+  <br/>
+  <button class="w-25 btn btn-primary py-2" (click)="searchArticles()">Find</button>
+  <br/>
+</div>
+<hr/>
+<br/>
 <div class="container my-3">
-  <div class="row row-cols-3">
-    <div class="col">
-      <div class="card">
-        <div class="card-header">
-          Article title
-        </div>
-        <div class="card-body">
-          Article product: Chocolate "Snickers"
-          <br/>
-          Article rating: 5.0/5.0
-          <br/>
-          Author: Ivan Ivanov
-          <br/>
-          Comments: 15
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-lg btn-primary w-100">Show</button>
-        </div>
+  <div class="card-deck" *ngFor="let item of response.result">
+    <div class="card">
+      <div class="card-header">
+        {{item.title}}
       </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">
-          Article title
-        </div>
-        <div class="card-body">
-          Article product: Chocolate "Snickers"
-          <br/>
-          Article rating: 5.0/5.0
-          <br/>
-          Author: Ivan Ivanov
-          <br/>
-          Comments: 15
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-lg btn-primary w-100">Show</button>
-        </div>
+      <div class="card-body">
+        Product: {{item.productName}}
+        <br/>
+        Product rate: {{item.productRate}}/10
+        <br/>
+        Author: {{item.authorLogin}}
+        <br/>
+        Comments: {{item.comments.length}}
+        <br/>
+        Article rate: {{item.articleRate}}
       </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">
-          Article title
-        </div>
-        <div class="card-body">
-          Article product: Chocolate "Snickers"
-          <br/>
-          Article rating: 5.0/5.0
-          <br/>
-          Author: Ivan Ivanov
-          <br/>
-          Comments: 15
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-lg btn-primary w-100">Show</button>
-        </div>
+      <div class="card-footer">
+        <button class="btn btn-lg btn-primary w-100">Show</button>
       </div>
     </div>
   </div>
 </div>
+<br/>
+<div class="container w-100 text-center" *ngIf="response.result">
+  <button class="btn btn btn-light btn-outline-success" *ngIf="response.pageNumber > 0"
+          (click)="response.pageNumber = response.pageNumber - 1; searchArticles()">
+    <<
+  </button>
+  <button class="btn btn-light btn-outline-success" *ngIf="response.pageNumber + 1 < response.totalPages"
+          (click)="response.pageNumber = response.pageNumber + 1; searchArticles()">
+    >>
+  </button>
+</div>
+<ng-template *ngIf="response.result && response.result.length === 0">
+  No articles found for such content
+</ng-template>

@@ -23,8 +23,4 @@ export class HeaderComponent implements OnInit {
   logOut(): void {
     this.authService.logOut();
   }
-
-  openAuthPage(): void {
-    this.router.navigate(['/auth/sign-in']);
-  }
 }

@@ -10,7 +10,7 @@ import {RouterModule} from '@angular/router';
 import {MainComponent} from './main/main.component';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthGuard} from './guards/auth.guard';
 
 @NgModule({
@@ -29,10 +29,11 @@ import {AuthGuard} from './guards/auth.guard';
       [
         {path: 'auth/sign-in', component: AuthSignInComponent},
         {path: 'auth/sign-up', component: AuthSignUpComponent},
-        {path: '', component: MainComponent, canActivate: [AuthGuard]}
+        {path: 'articles', component: MainComponent}
       ]
     ),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {

@@ -31,7 +31,6 @@ export class AuthSignUpComponent implements OnInit {
     this.errorResponse = new ErrorResponseModel();
 
     if (!this.signUpForm.valid) {
-      console.log('INVALID');
       this.errorResponse.code = HttpStatusCode.BAD_REQUEST;
       return;
     }
@@ -40,7 +39,6 @@ export class AuthSignUpComponent implements OnInit {
   }
 
   processError(): void {
-    console.log('error = '+ this.errorResponse.code);
     if (this.errorResponse.code === HttpStatusCode.BAD_REQUEST) {
       this.errorResponse.message = Messages.MESSAGE_WRONG_REGISTER_DATA;
     } else if (this.errorResponse.code === HttpStatusCode.FORBIDDEN) {
