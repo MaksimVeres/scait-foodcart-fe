@@ -1,4 +1,4 @@
-import { UserSignUpModel } from './user-sign-up-model';
+import {UserSignUpModel} from './user-sign-up-model';
 
 describe('UserSignUpModel', () => {
   it('should create an instance', () => {

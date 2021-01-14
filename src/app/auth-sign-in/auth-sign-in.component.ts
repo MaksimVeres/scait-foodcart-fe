@@ -41,7 +41,7 @@ export class AuthSignInComponent implements OnInit {
     if (this.errorResponse.code === HttpStatusCode.UNAUTHORIZED) {
       this.errorResponse.message = Messages.MESSAGE_WRONG_LOGIN_OR_PASSWORD;
     } else if (this.errorResponse.code === HttpStatusCode.BAD_REQUEST) {
-      this.errorResponse.message = Messages.MESSAGE_BAD_REQUEST;
+      this.errorResponse.message = Messages.MESSAGE_WRONG_LOGIN_OR_PASSWORD;
     } else if (this.errorResponse.code === HttpStatusCode.FORBIDDEN) {
       this.errorResponse.message = Messages.MESSAGE_USER_IS_NOT_ACTIVE;
     } else if (this.errorResponse.code === HttpStatusCode.INTERNAL_SERVER_ERROR) {

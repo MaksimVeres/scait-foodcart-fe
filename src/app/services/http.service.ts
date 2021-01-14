@@ -10,7 +10,7 @@ export class HttpService {
   constructor(private http: HttpClient) {
   }
 
-  doGet(url: string, param, successCallback, errorResponse: ErrorResponseModel): void {
+  doGetCatchingError(url: string, param, successCallback, errorResponse: ErrorResponseModel): void {
     this.http.get<any>(url, {params: param})
       .subscribe(
         response => {
@@ -18,6 +18,18 @@ export class HttpService {
         },
         error => {
           errorResponse.code = error.status;
+        }
+      );
+  }
+
+  doGet(url: string, param, successCallback: any, errorCallback: any): void {
+    this.http.get<any>(url, {params: param})
+      .subscribe(
+        response => {
+          successCallback(response);
+        },
+        error => {
+          errorCallback(error);
         }
       );
   }

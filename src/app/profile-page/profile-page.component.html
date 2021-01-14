@@ -1,0 +1,20 @@
+<div *ngIf="result.value">
+  <div class="card">
+    <div class="card-header modal-header">
+      <h4>{{result.value.login}}</h4>
+      <img *ngIf="result.value.image" alt="profile image" src="{{getImagePath()}}"
+           style="max-width: 250px; max-height: 250px;"/>
+    </div>
+    <div class="card-body">
+      Comments: {{result.value.comments.length}}
+      <br/>
+    </div>
+  </div>
+  <h5>Articles ({{result.value.articles.length}})</h5>
+  <ul>
+    <li *ngFor="let article of result.value.articles">
+      <a class="text-black-50" href="articles/{{article.uuid}}">{{article.title}}
+        <span *ngIf="article.comments.length > 0">[{{article.articleRate}}/10]</span></a>
+    </li>
+  </ul>
+</div>

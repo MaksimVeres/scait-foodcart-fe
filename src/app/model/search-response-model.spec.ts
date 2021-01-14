@@ -1,4 +1,4 @@
-import { SearchResponseModel } from './search-response-model';
+import {SearchResponseModel} from './search-response-model';
 
 describe('SearchResponseModel', () => {
   it('should create an instance', () => {

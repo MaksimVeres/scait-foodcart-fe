@@ -1,4 +1,4 @@
-import { ErrorResponseModel } from './error-response-model';
+import {ErrorResponseModel} from './error-response-model';
 
 describe('ErrorResponseModel', () => {
   it('should create an instance', () => {

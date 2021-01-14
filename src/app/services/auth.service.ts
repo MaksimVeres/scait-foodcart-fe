@@ -13,13 +13,19 @@ export class AuthService {
 
   private static AUTH_ENDPOINT = environment.api_url + '/auth';
   private static JWT_ITEM = 'jwt';
-  private static REFRESH_TIME = 90000;
+  /* 1 min */
+  private static REFRESH_TIME = 60000;
 
   constructor(private http: HttpService,
               private router: Router) {
     this.startAsyncRefresher().catch(error => {
       console.log(error);
+      this.logOut();
     });
+  }
+
+  get isLoggedIn(): boolean {
+    return this.getToken() != null;
   }
 
   signIn(user: UserSignInModel, errorResponse: ErrorResponseModel): void {
@@ -43,6 +49,11 @@ export class AuthService {
     const error = new ErrorResponseModel();
     while (true) {
 
+      if (error.code) {
+        this.logOut();
+        break;
+      }
+
       if (this.isLoggedIn) {
         this.http.doPost(refreshTokenUrl, null,
           (response) => {
@@ -50,8 +61,7 @@ export class AuthService {
           },
           error);
       }
-      // 10 min
-      await this.delay(600000);
+      await this.delay(AuthService.REFRESH_TIME);
     }
   }
 
@@ -61,10 +71,6 @@ export class AuthService {
 
   getToken(): string {
     return localStorage.getItem(AuthService.JWT_ITEM);
-  }
-
-  get isLoggedIn(): boolean {
-    return this.getToken() != null;
   }
 
   logOut(): void {

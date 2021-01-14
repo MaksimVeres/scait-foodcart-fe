@@ -17,7 +17,7 @@ export class SearchService {
 
   searchArticles(model: TextSearchModel, responseModel: SearchResponseModel, errorResponse: ErrorResponseModel): void {
     const articlesSearchUrl = SearchService.SEARCH_ENDPOINT + '/articles';
-    this.httpService.doGet(articlesSearchUrl, model,
+    this.httpService.doGetCatchingError(articlesSearchUrl, model,
       (response) => {
         responseModel.result = response.result;
         responseModel.pageNumber = response.pageInfo.number;

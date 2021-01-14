@@ -12,16 +12,16 @@
 </h4>
 <div class="text-center">
   <label class="w-25">
-    <input type="text" class="form-control" placeholder="Search" [(ngModel)]="model.text">
+    <input [(ngModel)]="model.text" class="form-control" placeholder="Search" type="text">
   </label>
   <br/>
-  <button class="w-25 btn btn-primary py-2" (click)="searchArticles()">Find</button>
+  <button (click)="searchArticles()" class="w-25 btn btn-primary py-2">Find</button>
   <br/>
 </div>
 <hr/>
 <br/>
 <div class="container my-3">
-  <div class="card-deck" *ngFor="let item of response.result">
+  <div *ngFor="let item of response.result" class="card-deck">
     <div class="card">
       <div class="card-header">
         {{item.title}}
@@ -31,26 +31,32 @@
         <br/>
         Product rate: {{item.productRate}}/10
         <br/>
-        Author: {{item.authorLogin}}
+        Author: <a href="user/{{item.authorUuid}}">{{item.authorLogin}}</a>
         <br/>
         Comments: {{item.comments.length}}
         <br/>
-        Article rate: {{item.articleRate}}
+        <span *ngIf="item.comments.length > 0">
+        Article rate: {{item.articleRate}}/10,
+          <br/>
+        </span>
+        {{item.pubDateTime}}
       </div>
       <div class="card-footer">
-        <button class="btn btn-lg btn-primary w-100">Show</button>
+        <button (click)="openArticle(item.uuid)" class="btn btn-lg btn-primary w-100">
+          Show
+        </button>
       </div>
     </div>
   </div>
 </div>
 <br/>
-<div class="container w-100 text-center" *ngIf="response.result">
-  <button class="btn btn btn-light btn-outline-success" *ngIf="response.pageNumber > 0"
-          (click)="response.pageNumber = response.pageNumber - 1; searchArticles()">
+<div *ngIf="response.result" class="container w-100 text-center">
+  <button (click)="response.pageNumber = response.pageNumber - 1; searchArticles()" *ngIf="response.pageNumber > 0"
+          class="btn btn btn-light btn-outline-success">
     <<
   </button>
-  <button class="btn btn-light btn-outline-success" *ngIf="response.pageNumber + 1 < response.totalPages"
-          (click)="response.pageNumber = response.pageNumber + 1; searchArticles()">
+  <button (click)="response.pageNumber = response.pageNumber + 1; searchArticles()" *ngIf="response.pageNumber + 1 < response.totalPages"
+          class="btn btn-light btn-outline-success">
     >>
   </button>
 </div>

@@ -6,22 +6,22 @@
         {{processError()}}
         {{errorResponse.message}}
       </h6>
-      <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+      <form (ngSubmit)="signUp()" [formGroup]="signUpForm">
         <label>
-          <input type="text" placeholder="Email" class="form-control" formControlName="email">
+          <input class="form-control" formControlName="email" placeholder="Email" type="text">
         </label>
         <br/>
         <label>
-          <input type="text" placeholder="Login" class="form-control" formControlName="login">
+          <input class="form-control" formControlName="login" placeholder="Login" type="text">
         </label>
         <br/>
         <label>
-          <input type="password" placeholder="Password" class="form-control" formControlName="password">
+          <input class="form-control" formControlName="password" placeholder="Password" type="password">
         </label>
         <br/>
-        <input type="submit" class="btn btn-lg btn-primary text-light form-control" value="Signup">
+        <input class="btn btn-lg btn-primary text-light form-control" type="submit" value="Signup">
         <br/>
-        <a href="auth/sign-in" class="form-text my-2">I have account</a>
+        <a class="form-text my-2" href="auth/sign-in">I have account</a>
       </form>
     </div>
   </div>

@@ -6,18 +6,18 @@
         {{processError()}}
         {{errorResponse.message}}
       </h6>
-      <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+      <form (ngSubmit)="signIn()" [formGroup]="signInForm">
         <label class="py-2">
-          <input type="text" placeholder="Email" class="form-control" formControlName="email">
+          <input class="form-control" formControlName="email" placeholder="Email" type="text">
         </label>
         <br/>
         <label>
-          <input type="password" placeholder="Password" class="form-control" formControlName="password">
+          <input class="form-control" formControlName="password" placeholder="Password" type="password">
         </label>
         <br/>
-        <input type="submit" class="btn btn-lg btn-primary text-light form-control" value="Sign in">
+        <input class="btn btn-lg btn-primary text-light form-control" type="submit" value="Sign in">
         <br/>
-        <a href="auth/sign-up" class="form-text my-2">I don't have account yet</a>
+        <a class="form-text my-2" href="auth/sign-up">I don't have account yet</a>
       </form>
     </div>
   </div>

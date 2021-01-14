@@ -5,6 +5,7 @@ import {SearchResponseModel} from '../model/search-response-model';
 import {SearchService} from '../services/search.service';
 import {Messages} from '../constants/messages';
 import HttpStatusCode from '../constants/http-status-code';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -17,7 +18,8 @@ export class MainComponent implements OnInit {
   model: TextSearchModel = new TextSearchModel();
   error: ErrorResponseModel = new ErrorResponseModel();
 
-  constructor(private searchService: SearchService) {
+  constructor(private searchService: SearchService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -39,5 +41,9 @@ export class MainComponent implements OnInit {
     } else {
       this.error.message = Messages.MESSAGE_INTERNAL_SERVER_ERROR;
     }
+  }
+
+  openArticle(uuid): void {
+    this.router.navigate(['articles', uuid]);
   }
 }

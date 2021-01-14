@@ -8,4 +8,7 @@ export class Messages {
   public static MESSAGE_WRONG_SEARCH_REQUEST = 'Wrong search request';
   public static MESSAGE_FORBIDDEN = 'Action is forbidden';
   public static MESSAGE_SUCH_USER_ALREADY_EXISTS = 'Such user already exists';
+  public static MESSAGE_YOU_ALREADY_COMMENTED_ARTICLE = 'You already commented article';
+  public static MESSAGE_SOMETHING_WENT_WRONG = 'Something went wrong';
+  public static MESSAGE_WRONG_COMMENT = 'Wrong comment';
 }

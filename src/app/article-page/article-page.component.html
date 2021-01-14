@@ -1,0 +1,94 @@
+<div *ngIf="result.value; else articleIsNotLoaded">
+  <h3 class="modal-header">
+    {{result.value.title}}
+    <img *ngIf="getImagePath()" alt="img" src="{{getImagePath()}}" style="max-width: 150px; max-height: 150px;"/>
+  </h3>
+  <div class="modal-body">
+    <div class="bg-light rounded p-2 text-body text-wrap">
+      <h4 class="text-muted">{{result.value.productName}} - {{result.value.productRate}}/10</h4>
+      <h5 class="text-muted">
+        Author: <a href="user/{{result.value.authorUuid}}">{{result.value.authorLogin}}</a>
+      </h5>
+      <br/>
+      <div style="font-size: 21px">
+        {{result.value.text}}
+      </div>
+      <hr/>
+      <div class="container">
+        <div class="row">
+          <div *ngIf="result.value.proses" class="col">
+            Proses:
+            <ul class="text-success">
+              <li *ngFor="let pros of result.value.proses.split(';^;')">
+                {{pros}}
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="result.value.conses" class="col">
+            Conses:
+            <ul class="text-danger">
+              <li *ngFor="let cons of result.value.conses.split(';^;')">
+                {{cons}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="text-right">
+        <div *ngIf="result.value.comments && result.value.comments.length > 0">
+          Article rate: {{result.value.articleRate}}/10
+          <br/>
+        </div>
+        {{result.value.pubDateTime}}
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="result.value" class="container-fluid" style="width: 100%">
+  <div class="row">
+    <div class="col">
+      <h5 *ngIf="createCommentError.code" class="text-danger">
+        {{processErrorMessage()}}
+        {{createCommentError.message}}
+      </h5>
+      <label class="w-75 border bg-light border-light rounded p-1">
+        New comment:
+        <textarea [(ngModel)]="model.text" class="form-control text-wrap" rows="5"></textarea>
+        <br/>
+        <label>
+          My rate for this article:
+          <input [(ngModel)]="model.articleRate" [max]="10" [min]="0" class="form-control" placeholder="0/10" style="max-width: 150px"
+                 type="number">
+        </label>
+        <br/>
+        <button (click)="createComment()" class="btn btn-primary form-control">Send</button>
+      </label>
+    </div>
+    <div *ngIf="result.value.comments.length > 0; else noCommentsFound" class="col col-lg">
+      <h5 class="toast-header">Comments ({{result.value.comments.length}}): </h5>
+      <br/>
+
+      <div *ngFor="let comment of result.value.comments" class="card my-2">
+        <div class="card-header">
+          <a class="text-primary" href="user/{{comment.authorUuid}}">{{comment.authorLogin}}</a>
+          - {{comment.pubDateTime}}
+        </div>
+        <div class="card-body">
+          {{comment.articleRate}}/10:
+          <br/>
+          {{comment.text}}
+        </div>
+      </div>
+
+    </div>
+    <ng-template #noCommentsFound>
+      <div class="col">
+        <h5 class="toast-header">The article has no comments yet. Do not hesitate to rate it just now!</h5>
+      </div>
+    </ng-template>
+  </div>
+</div>
+<ng-template #articleIsNotLoaded>
+  Article is not loaded. Please wait.
+</ng-template>

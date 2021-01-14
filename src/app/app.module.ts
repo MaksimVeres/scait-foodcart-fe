@@ -12,6 +12,10 @@ import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthGuard} from './guards/auth.guard';
+import {ArticlePageComponent} from './article-page/article-page.component';
+import {ArticleNewComponent} from './article-new/article-new.component';
+import {ProfilePageComponent} from './profile-page/profile-page.component';
+import {OwnProfilePageComponent} from './own-profile-page/own-profile-page.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import {AuthGuard} from './guards/auth.guard';
     AuthSignInComponent,
     HeaderComponent,
     AuthSignUpComponent,
-    MainComponent
+    MainComponent,
+    ArticlePageComponent,
+    ArticleNewComponent,
+    ProfilePageComponent,
+    OwnProfilePageComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +37,10 @@ import {AuthGuard} from './guards/auth.guard';
       [
         {path: 'auth/sign-in', component: AuthSignInComponent},
         {path: 'auth/sign-up', component: AuthSignUpComponent},
-        {path: 'articles', component: MainComponent}
+        {path: 'articles', component: MainComponent},
+        {path: 'articles/:uuid', component: ArticlePageComponent},
+        {path: 'user/my', component: OwnProfilePageComponent},
+        {path: 'user/:uuid', component: ProfilePageComponent}
       ]
     ),
     ReactiveFormsModule,
