@@ -1,5 +1,5 @@
 <h4 class="modal-header text-center">Articles</h4>
-<h4 *ngIf="response.result">
+<h4 *ngIf="response.result" class="text-center">
   Found: {{response.totalElements}}
   <br/>
   <ng-template *ngIf="response.totalPages > 0">
@@ -55,7 +55,8 @@
           class="btn btn btn-light btn-outline-success">
     <<
   </button>
-  <button (click)="response.pageNumber = response.pageNumber + 1; searchArticles()" *ngIf="response.pageNumber + 1 < response.totalPages"
+  <button (click)="response.pageNumber = response.pageNumber + 1; searchArticles()"
+          *ngIf="response.pageNumber + 1 < response.totalPages"
           class="btn btn-light btn-outline-success">
     >>
   </button>

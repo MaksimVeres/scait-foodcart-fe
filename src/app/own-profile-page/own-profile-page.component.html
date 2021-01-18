@@ -6,8 +6,49 @@
            style="max-width: 250px; max-height: 250px;"/>
     </div>
     <div class="card-body">
-      <button class="btn btn-primary">Change password</button>
-      <button class="btn btn-primary">Upload image</button>
+      <div class="container">
+        <div class="row">
+          <div class="col border border-light text-center">
+            <div class="my-5">
+              Email: {{result.value.email}}
+            </div>
+          </div>
+          <div class="col border border-light text-center">
+            <p *ngIf="this.loginChangeError.code" class="text-danger">
+              {{processLoginChangeError()}}
+              {{this.loginChangeError.message}}
+            </p>
+            <label>
+              Login: <input [(ngModel)]="login" [maxLength]="15" [minLength]="3" class="form-control"
+                            placeholder="{{result.value.login}}" type="text" value="">
+            </label>
+            <br/>
+            <button (click)="onLoginSubmit()" class="btn btn-info form-control">Save login</button>
+          </div>
+          <div class="col border border-light text-center">
+            <div class="my-5">
+              Password:
+              <br/>
+              <button (click)="toChangePasswordPage()" class="btn btn-info form-control">Change</button>
+            </div>
+          </div>
+          <div class="col border border-light text-center">
+            <form (ngSubmit)="onImageSubmit()" [formGroup]="uploadForm" enctype="multipart/form-data" method="post">
+              <p *ngIf="this.imageUploadError.code" class="text-danger">
+                {{processImageError()}}
+                {{this.imageUploadError.message}}
+              </p>
+              <br/>
+              Profile image:
+              <input (change)="onFileSelect($event)" accept="image/jpeg, image/png, image/gif" class="input-group form-control-file text-wrap" name="image"
+                     size="4194304" type="file">
+              <br/>
+              <input class="btn form-control btn-info" type="submit" value="Save image">
+            </form>
+          </div>
+        </div>
+      </div>
+
       <br/>
       Comments: {{result.value.comments.length}}
       <br/>

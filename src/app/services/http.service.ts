@@ -43,4 +43,16 @@ export class HttpService {
           errorResponse.code = error.status;
         });
   }
+
+  doPatch(url: string, param, successCallback: any, errorResponse: ErrorResponseModel): void {
+    this.http.patch<any>(url, {params: param})
+      .subscribe(
+        response => {
+          successCallback(response);
+        },
+        error => {
+          errorResponse.code = error.status;
+        }
+      );
+  }
 }

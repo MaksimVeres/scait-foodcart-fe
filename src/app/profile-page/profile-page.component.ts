@@ -4,6 +4,7 @@ import {ResultConsumer} from '../model/result-consumer';
 import {UserModel} from '../model/user-model';
 import {ErrorResponseModel} from '../model/error-response-model';
 import {UserService} from '../services/user.service';
+import HttpStatusCode from '../constants/http-status-code';
 
 @Component({
   selector: 'app-profile-page',
@@ -32,5 +33,11 @@ export class ProfilePageComponent implements OnInit {
 
   getImagePath(): string {
     return this.userService.getImagePath(this.result.value.uuid);
+  }
+
+  processError(): void {
+    if (this.result.error.code === HttpStatusCode.FORBIDDEN || this.result.error.code === HttpStatusCode.UNAUTHORIZED) {
+      this.router.navigate(['auth/sign-in']);
+    }
   }
 }

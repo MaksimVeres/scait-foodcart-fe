@@ -1,4 +1,8 @@
 <div *ngIf="result.value">
+  <h3 *ngIf="result.error" class="text-danger">
+    {{processError()}}
+    {{result.error.message}}
+  </h3>
   <div class="card">
     <div class="card-header modal-header">
       <h4>{{result.value.login}}</h4>

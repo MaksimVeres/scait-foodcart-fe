@@ -5,6 +5,7 @@ import {ResultConsumer} from '../model/result-consumer';
 import {UserModel} from '../model/user-model';
 import {AuthService} from './auth.service';
 import {Router} from '@angular/router';
+import {ErrorResponseModel} from '../model/error-response-model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,37 @@ export class UserService {
     this.httpService.doGet(api, null, this.userGetCallback(resultConsumer), this.userGetErrorCallback(resultConsumer));
   }
 
+  uploadImage(formData: FormData, errorResponseModel: ErrorResponseModel): void {
+    this.httpService.doPost(this.getImageUploadPath(), formData,
+      (response) => {
+        console.log('Image uploaded');
+      },
+      errorResponseModel
+    );
+  }
+
+  updateLogin(login: string, errorResponseModel: ErrorResponseModel): void {
+    const api = UserService.ENDPOINT + '/my/login?login=' + login;
+    this.httpService.doPatch(api, null, (response) => {
+        console.log('Login changed');
+        alert('Login changed. Please log in again');
+        this.authService.logOut();
+        this.router.navigate(['auth/sign-in']);
+      },
+      errorResponseModel);
+  }
+
+  updatePassword(password: string, errorResponseModel: ErrorResponseModel): void {
+    const api = UserService.ENDPOINT + '/my/password';
+    this.httpService.doPost(api, {password}, (response) => {
+        console.log('Password changed');
+        alert('Password changed. Please log in again');
+        this.authService.logOut();
+        this.router.navigate(['auth/sign-in']);
+      },
+      errorResponseModel);
+  }
+
   userGetCallback(resultConsumer: ResultConsumer<UserModel>): any {
     return (response) => {
       resultConsumer.value = response;
@@ -50,5 +82,9 @@ export class UserService {
 
   getImagePath(uuid: string): string {
     return UserService.ENDPOINT + '/' + uuid + '/image';
+  }
+
+  getImageUploadPath(): string {
+    return UserService.ENDPOINT + '/my/image';
   }
 }

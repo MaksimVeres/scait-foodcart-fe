@@ -16,6 +16,7 @@ import {ArticlePageComponent} from './article-page/article-page.component';
 import {ArticleNewComponent} from './article-new/article-new.component';
 import {ProfilePageComponent} from './profile-page/profile-page.component';
 import {OwnProfilePageComponent} from './own-profile-page/own-profile-page.component';
+import {PasswordChangePageComponent} from './password-change-page/password-change-page.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {OwnProfilePageComponent} from './own-profile-page/own-profile-page.compo
     ArticlePageComponent,
     ArticleNewComponent,
     ProfilePageComponent,
-    OwnProfilePageComponent
+    OwnProfilePageComponent,
+    PasswordChangePageComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import {OwnProfilePageComponent} from './own-profile-page/own-profile-page.compo
         {path: 'articles', component: MainComponent},
         {path: 'articles/:uuid', component: ArticlePageComponent},
         {path: 'user/my', component: OwnProfilePageComponent},
-        {path: 'user/:uuid', component: ProfilePageComponent}
+        {path: 'user/:uuid', component: ProfilePageComponent},
+        {path: 'user/my/password-change', component: PasswordChangePageComponent}
       ]
     ),
     ReactiveFormsModule,
