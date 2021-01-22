@@ -65,8 +65,16 @@ export class OwnProfilePageComponent implements OnInit {
     return this.userService.getImagePath(this.result.value.uuid);
   }
 
+  processProfileLoadError(): void {
+    if (this.result.error.code === HttpStatusCode.FORBIDDEN || this.result.error.code === HttpStatusCode.UNAUTHORIZED) {
+      this.authService.logOut();
+      this.router.navigate(['auth/sign-in']);
+    }
+  }
+
   processImageError(): void {
     if (this.imageUploadError.code === HttpStatusCode.FORBIDDEN || this.imageUploadError.code === HttpStatusCode.UNAUTHORIZED) {
+      this.authService.logOut();
       this.router.navigate(['auth/sign-in']);
     } else if (this.imageUploadError.code === HttpStatusCode.BAD_REQUEST) {
       this.imageUploadError.message = Messages.MESSAGE_NO_FILE_SELECTED;
@@ -77,6 +85,7 @@ export class OwnProfilePageComponent implements OnInit {
 
   processLoginChangeError(): void {
     if (this.loginChangeError.code === HttpStatusCode.FORBIDDEN || this.loginChangeError.code === HttpStatusCode.UNAUTHORIZED) {
+      this.authService.logOut();
       this.router.navigate(['auth/sign-in']);
     } else if (this.loginChangeError.code === HttpStatusCode.BAD_REQUEST) {
       this.loginChangeError.message = Messages.MESSAGE_BAD_LOGIN;

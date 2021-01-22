@@ -48,8 +48,10 @@ export class AuthService {
     const refreshTokenUrl = AuthService.AUTH_ENDPOINT + '/refresh';
     const error = new ErrorResponseModel();
     while (true) {
+      await this.delay(AuthService.REFRESH_TIME);
 
       if (error.code) {
+        console.log('Token refresh error');
         this.logOut();
         break;
       }
@@ -61,7 +63,6 @@ export class AuthService {
           },
           error);
       }
-      await this.delay(AuthService.REFRESH_TIME);
     }
   }
 

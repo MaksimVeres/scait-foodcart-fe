@@ -17,6 +17,9 @@ import {ArticleNewComponent} from './article-new/article-new.component';
 import {ProfilePageComponent} from './profile-page/profile-page.component';
 import {OwnProfilePageComponent} from './own-profile-page/own-profile-page.component';
 import {PasswordChangePageComponent} from './password-change-page/password-change-page.component';
+import {ArticleCreatePageComponent} from './article-create-page/article-create-page.component';
+import {ArticleEditPageComponent} from './article-edit-page/article-edit-page.component';
+import {OwnArticlesPageComponent} from './own-articles-page/own-articles-page.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import {PasswordChangePageComponent} from './password-change-page/password-chang
     ArticleNewComponent,
     ProfilePageComponent,
     OwnProfilePageComponent,
-    PasswordChangePageComponent
+    PasswordChangePageComponent,
+    ArticleCreatePageComponent,
+    ArticleEditPageComponent,
+    OwnArticlesPageComponent
   ],
   imports: [
     BrowserModule,
@@ -40,10 +46,13 @@ import {PasswordChangePageComponent} from './password-change-page/password-chang
         {path: 'auth/sign-in', component: AuthSignInComponent},
         {path: 'auth/sign-up', component: AuthSignUpComponent},
         {path: 'articles', component: MainComponent},
+        {path: 'articles/new', component: ArticleCreatePageComponent},
+        {path: 'articles/my', component: OwnArticlesPageComponent},
         {path: 'articles/:uuid', component: ArticlePageComponent},
+        {path: 'articles/:uuid/edit', component: ArticleEditPageComponent},
         {path: 'user/my', component: OwnProfilePageComponent},
-        {path: 'user/:uuid', component: ProfilePageComponent},
-        {path: 'user/my/password-change', component: PasswordChangePageComponent}
+        {path: 'user/my/password-change', component: PasswordChangePageComponent},
+        {path: 'user/:uuid', component: ProfilePageComponent}
       ]
     ),
     ReactiveFormsModule,

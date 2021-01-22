@@ -16,4 +16,9 @@ export class Messages {
   public static MESSAGE_SUCH_LOGIN_ALREADY_EXISTS = 'Such login already exists';
   public static MESSAGE_PASSWORDS_DONT_MATCH = 'Passwords don\'t match';
   public static MESSAGE_WRONG_PASSWORD = 'Wrong password';
+  public static MESSAGE_ARE_YOU_SURE_TO_PUBLISH_ARTICLE = 'Are you sure you are ready to publish the article?';
+  public static MESSAGE_PLEASE_FILL_ALL_THE_FIELDS = 'Please fill all the fields correctly';
+  public static MESSAGE_ARE_YOU_SURE_TO_ARCHIVE_ARTICLE = 'Are you sure you are want to archive the article?';
+  public static MESSAGE_ARE_YOU_SURE_TO_REPUBLISH_ARTICLE = 'Are you sure you are want to republish the article?';
+  public static MESSAGE_ARE_YOU_SURE_TO_UPDATE_ARTICLE = 'Are you sure you are want to update the article?';
 }

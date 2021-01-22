@@ -1,5 +1,5 @@
 export class ErrorResponseModel {
 
-  code: number;
-  message: string;
+    code: number;
+    message: string;
 }

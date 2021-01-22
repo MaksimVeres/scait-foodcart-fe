@@ -19,7 +19,7 @@
           <div *ngIf="result.value.proses" class="col">
             Proses:
             <ul class="text-success">
-              <li *ngFor="let pros of result.value.proses.split(';^;')">
+              <li *ngFor="let pros of result.value.proses.split(';~;')">
                 {{pros}}
               </li>
             </ul>
@@ -27,7 +27,7 @@
           <div *ngIf="result.value.conses" class="col">
             Conses:
             <ul class="text-danger">
-              <li *ngFor="let cons of result.value.conses.split(';^;')">
+              <li *ngFor="let cons of result.value.conses.split(';~;')">
                 {{cons}}
               </li>
             </ul>

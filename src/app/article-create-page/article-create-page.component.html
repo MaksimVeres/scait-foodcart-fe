@@ -1,0 +1,70 @@
+<h4 class="my-1 text-center">New article</h4>
+<h4 *ngIf="error.code" class="my-1 text-center text-danger">
+  {{processError()}}
+  {{error.message}}
+</h4>
+<div class="card my-5 p-2">
+  <div class="card-title text-center">
+    <label class="w-100">
+      <input [(ngModel)]="model.title" class="form-control input-group" placeholder="Title" type="text">
+    </label>
+    <form enctype="multipart/form-data" id="publishFormId"
+          method="post">
+      Image: <input (change)="onFileSelect($event)" accept="image/jpeg,image/png,image/gif" class="form-control-file"
+                    name="images" type="file">
+    </form>
+  </div>
+  <div class="card-header">
+    <label class="w-100">
+      Product name: <input [(ngModel)]="model.productName" class="form-control input-group" placeholder="Name"
+                           type="text">
+    </label>
+    <label style="min-width: 15%">
+      Product rate: <input [(ngModel)]="model.productRate" [max]="10" [min]="0" class="form-control" placeholder="0.0/10.0"
+                           required="required" type="number">
+    </label>
+  </div>
+  <div class="card-body">
+    <label class="w-100">
+      <textarea [(ngModel)]="model.text" class="form-control input-group" placeholder="Text"
+                style="min-height: 300px"></textarea>
+    </label>
+    <hr/>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          Proses:
+          <button (click)="addPros()" class="btn btn-success">+</button>
+          <ul>
+            <li *ngFor="let pros of proses; index as i;" class="p-2">
+              <label>
+                <input (input)="prosValue('pros-' + i, $event.target.value)" class="form-control" id="'pros-{{i}}'" placeholder="Pros"
+                       type="text">
+              </label>
+              <br/>
+              <button (click)="deletePros('pros-' + i)" class="btn btn-secondary" style="width: 50px;">-</button>
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+          Conses:
+          <button (click)="addCons()" class="btn btn-danger">+</button>
+          <ul>
+            <li *ngFor="let cons of conses; index as i;" class="p-2">
+              <label>
+                <input (input)="consValue('cons-' + i, $event.target.value)" class="form-control" id="'cons-{{i}}'" placeholder="Cons"
+                       type="text">
+              </label>
+              <br/>
+              <button (click)="deleteCons('cons-' + i)" class="btn btn-secondary" style="width: 50px;">-</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+    <input (click)="publishArticle()" class="btn btn-lg btn-primary w-100" form="publishFormId" type="submit"
+           value="Publish">
+  </div>
+</div>

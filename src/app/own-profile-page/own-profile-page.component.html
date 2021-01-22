@@ -40,7 +40,8 @@
               </p>
               <br/>
               Profile image:
-              <input (change)="onFileSelect($event)" accept="image/jpeg, image/png, image/gif" class="input-group form-control-file text-wrap" name="image"
+              <input (change)="onFileSelect($event)" accept="image/jpeg, image/png, image/gif"
+                     class="input-group form-control-file text-wrap" name="image"
                      size="4194304" type="file">
               <br/>
               <input class="btn form-control btn-info" type="submit" value="Save image">
@@ -62,3 +63,6 @@
     </li>
   </ul>
 </div>
+<span *ngIf="result.error.code">
+  {{processProfileLoadError()}}
+</span>

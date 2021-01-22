@@ -3,7 +3,10 @@
   <div class="w-100">
     <ul class="navbar-nav">
       <li *ngIf="isLoggedIn" class="nav-item active">
-        <a class="nav-link" href="#">New article</a>
+        <a class="nav-link" href="articles/new">New article</a>
+      </li>
+      <li *ngIf="isLoggedIn" class="nav-item active">
+        <a class="nav-link" href="articles/my">My articles</a>
       </li>
       <li *ngIf="isLoggedIn" class="nav-item active">
         <a class="nav-link" href="user/my">Profile</a>

@@ -1,0 +1,41 @@
+<div *ngIf="result.value">
+  {{sortResult()}}
+  <h4 class="text-center my-3">My articles ({{result.value.length}})</h4>
+  <h4 *ngIf="result.error.code" class="text-center text-danger">
+    {{processError()}}
+    {{result.error.message}}
+  </h4>
+  <div class="container">
+    <ul>
+      <li *ngFor="let article of this.result.value" class="border bg-light rounded p-2">
+        <hr/>
+        <span>
+          {{article.title}}
+          [<a class="text-primary" href="{{'articles/' + article.uuid}}">SHOW</a>]
+          <span *ngIf="article.status === 'APPROVED' || article.status === 'ARCHIVED'">
+            [<a class="text-info" href="{{'articles/' + article.uuid + '/edit'}}">EDIT</a>]
+          </span>
+          <span *ngIf="article.status === 'APPROVED'">
+            [<a (click)="archiveArticle(article.uuid)" class="text-danger" style="cursor: pointer">ARCHIVE</a>]
+          </span>
+          <span *ngIf="article.status === 'ARCHIVED'">
+            [<a (click)="republishArticle(article.uuid)" class="text-info" style="cursor: pointer">UNARCHIVE</a>]
+          </span>
+        </span>
+        <br/>
+        <span>Product: <span class="font-weight-bold text-black-50">{{article.productName}} [{{article.productRate}}
+          /10]</span></span>
+        <br/>
+        <span>Status: <span class="font-weight-bold text-black-50">{{article.status}}</span></span>
+        <br/>
+        <div *ngIf="article.comments.length > 0">
+          <span>Rate: <span class="font-weight-bold text-black-50">{{article.articleRate}}/10</span></span>
+          <br/>
+        </div>
+        <span>Comments: <span class="font-weight-bold text-black-50">{{article.comments.length}}</span></span>
+        <hr/>
+        {{article.pubDateTime}}
+      </li>
+    </ul>
+  </div>
+</div>
