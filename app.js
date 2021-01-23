@@ -1,20 +1,15 @@
 const express = require('express');
-const http = require('http');
-const path = require('path');
 const compression = require('compression');
 
 const app = express();
 
 app.use(compression());
 
-app.use(express.static(path.join(__dirname, 'dist/scait-foodcart-fe')));
+app.use(express.static('./dist/scait-foodcart-fe'));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/scait-foodcart-fe/index.html'));
+  res.sendFile('index.html', {root: './dist/scait-foodcart-fe/'});
 });
 
-const port = process.env.PORT || 3000;
-app.set('port', port);
+app.listen(process.env.PORT || 4200);
 
-const server = http.createServer(app);
-server.listen(port, () => console.log("running"));
