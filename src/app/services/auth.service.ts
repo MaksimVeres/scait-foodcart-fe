@@ -13,8 +13,8 @@ export class AuthService {
 
   private static AUTH_ENDPOINT = environment.api_url + '/auth';
   private static JWT_ITEM = 'jwt';
-  /* 1 min */
-  private static REFRESH_TIME = 60000;
+  /* 5 min */
+  private static REFRESH_TIME = 300000;
 
   constructor(private http: HttpService,
               private router: Router) {
